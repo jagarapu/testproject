@@ -47,6 +47,54 @@ class DefaultController extends Controller
         ));
     }
     
+      
+    /**
+     * @Route("/list", name="userlist")
+     */  
+    public function userListAction(){
+       $em = $this->getDoctrine()->getManager();
+       $users = $em->getRepository('AppBundle:User')->findAll();   
+       return $this->render('AppBundle:Registration:userslist.html.twig', array(
+                        'users' => $users,
+            ));
+        
+    }
+    
+     /**
+     * @Route("/edit/{id}", requirements={"id" = "\d+"}, name="usereditpage")
+     */
+    public function editCandidateAction(Request $request, $id){ 
+      $em = $this->getDoctrine()->getManager();
+      $user = $em->getRepository('AppBundle:User')->findOneBy(array('id' => $id));
+      $form = $this->createForm(RegistrationType::class, $user);  
+      $form->handleRequest($request);
+      
+      if ($form->isSubmitted() && $form->isValid()) {           
+            $user = $form->getData();
+            $em->persist($user);
+            $em->flush();
+            $url = $this->generateUrl('userlist');
+            $response = new RedirectResponse($url);
+            return $response;
+        }
+        
+        return $this->render('AppBundle:Registration:usereditpage.html.twig', array(
+                    'form' => $form->createView(),
+                    'id' => $id,
+        ));  
+    } 
+    
+    /**
+     * @Route("/delete/{id}", requirements={"id" = "\d+"}, name="userdeletepage")
+     */
+    public function deleteUserAction(Request $request, $id){ 
+      $em = $this->getDoctrine()->getManager();
+      $candidate = $em->getRepository('AppBundle:User')->findOneBy(array('id' => $id));
+      $em->remove($candidate);
+      $em->flush();
+      return $this->render('AppBundle:Registration:userdeletepage.html.twig');  
+    } 
+    
     
     /**
      * @Route("/success", name="successpage")

@@ -1,0 +1,83 @@
+{% block stylesheets %}   
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+    
+    <div class="container">
+          <style>
+            .error-message{
+                color: red;
+            }
+            .large_text {
+                width: 250px;
+            }
+        </style>   
+        <title>{% block title %}Registration Form{% endblock %}</title>
+    <div class="container">
+        {{ form_start(form, {'method': 'post', 'action': path('usereditpage', {'id': id }), 'attr': {'class': 'usereditpage','novalidate': 'novalidate'}}) }}
+        <div class="row"> 
+        <div class="col-sm-6"> 
+            <h3> Registration&nbsp;Form</h3>
+        </div>
+        <div class="col-sm-6">
+            <br> <h5> <a href="{{ path('userlist')}}">User List Page</a></h5>
+        </div>                                                       
+         </div>  
+         <br>   
+        <div class="row">
+            <div class="col-md-2">{{ form_label(form.firstname) }}</div>
+            <div class="col-md-2">{{ form_widget(form.firstname) }}</div>
+            <div class="col-md-4">{{ form_errors(form.firstname) }}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form_label(form.lastname) }}</div>
+            <div class="col-md-2">{{ form_widget(form.lastname) }}</div>
+            <div class="col-md-4">{{ form_errors(form.lastname) }}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form_label(form.email) }}</div>
+            <div class="col-md-2">{{ form_widget(form.email) }}</div>
+            <div class="col-md-4">{{ form_errors(form.email) }}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form_label(form.username) }}</div>
+            <div class="col-md-2">{{ form_widget(form.username) }}</div>
+            <div class="col-md-4">{{ form_errors(form.username) }}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form_label(form.mobile) }}</div>
+            <div class="col-md-2">{{ form_widget(form.mobile) }}</div>
+            <div class="col-md-4">{{ form_errors(form.mobile) }}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-2">{{ form_label(form.dateofbirth) }}</div>
+            <div class="col-md-2">{{ form_widget(form.dateofbirth) }}</div>
+            <div class="col-md-4">{{ form_errors(form.dateofbirth) }}</div>
+        </div>  
+        <br>
+        <div class="row">   
+            <div class="col-sm-2">{{ form_label(form.plainPassword) }}</div>
+            <div class="col-sm-2">{{ form_widget(form.plainPassword) }}</div>
+            <div class="col-sm-4">{{ form_errors(form.plainPassword) }}</div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">  
+            <div class="col-sm-2 col-sm-offset-2"> <input type="submit" name="submit" value="Update" class="btn btn-primary"/></div>
+            <div class="col-sm-2"></div>
+        </div>  
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+{% endblock %}
